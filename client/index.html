@@ -25,7 +25,7 @@
 		<form onsubmit="return onSubmit();">
 
 			<h1><span>Crawler</span></h1>
-			<p>Andrew Matasek - 3/28/18</p>
+			<p id="author">Andrew Matasek - 3/28/18</p>
 			<h2>A tool that searches US State government websites to help find unclaimed money</h2>   
 
 			<div class="section">
@@ -59,13 +59,21 @@
 				</div>
 			</div>
 			<div class="section">
-				<h3>3. Profit!</h3>
+				<h3>3. Profit</h3>
 				<div class="section-body">
 					<button type="submit">Start</button>
 				</div>
 			</div>
 
 		</form>        
+	</div>
+
+	<div id="modal-summary" class="modal">
+		<div class="modal-content">
+			<i class="close fas fa-times"></i>
+			<h3 id="h3-results"></h3>
+			<p id="p-results"></p>
+		</div>	
 	</div>
 
 </body>
