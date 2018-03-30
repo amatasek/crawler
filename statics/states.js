@@ -1,3 +1,5 @@
+var Browser = require( 'zombie' );
+
 let states = [
 	
 	{
@@ -6,7 +8,31 @@ let states = [
 		implemented: true,
 		url: 'https://treasurer.mo.gov/UnclaimedProperty/',
 		search: function( person, result ){
-			return result;
+			var me = this,
+				browser = new Browser();
+
+			return new Promise( function( resolve, reject ){		
+				browser.visit( me.url, function(){
+					
+					browser.fill( '#UCPname5', person.last + ' ' + person.first );
+
+					browser.pressButton( '#Button1', function(){
+						
+						// A table only exists in the DOM if we have results
+						var resultTableBody = browser.document.querySelector( 'tbody' );
+						
+						if ( resultTableBody ){						
+
+							// Every row in the resulting table represents unclaimed funds
+							for ( let row of resultTableBody.querySelectorAll( 'tr' ) ) {								
+								result.money += Number( row.lastElementChild.innerHTML.trim().replace( /[^0-9\.]+/g, '' ) );
+							}							
+						}
+
+						resolve( result );
+					});
+				});
+			});	
 		}
 	},
 
@@ -16,6 +42,11 @@ let states = [
 		implemented: true,
 		url: 'https://tap.revenue.wi.gov/UCPSearch/_/',
 		search: function( person, result ){
+			var me = this,
+				browser = new Browser();
+
+			browser.visit( me.url );
+
 			return result;
 		}
 	},
