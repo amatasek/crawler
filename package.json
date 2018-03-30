@@ -1,0 +1,22 @@
+{
+    "name": "crawler",
+    "version": "0.0.1",
+    "description": "A tool that searches US State government websites to help find unclaimed money",
+    "main": "main.js",
+    "engines": {
+        "node": "8.0.0"
+    },
+    "dependencies": {
+        
+    },
+    "scripts": {
+        "start": "node main"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "Andrew Matasek",
+    "license": "",
+    "homepage": "localhost:3000"
+}
