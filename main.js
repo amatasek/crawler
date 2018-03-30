@@ -11,13 +11,13 @@ console.log( 'Starting Application:', new Date().toUTCString() );
 var express = require( 'express' ),
 	app = express();
    
-app.http = require( 'http' ).Server( app ),
+app.http = require( 'http' ).Server( app );
 app.io = require( 'socket.io' )( app.http );
 
 app.use( express.static( __dirname + '/client' ) );
 
-app.http.listen( 3000, function(){
-	console.log( 'Navigate your browser to localhost:3000' );
+app.http.listen( SETTINGS.port, function(){
+	console.log( 'Navigate your browser to localhost:' + SETTINGS.port );
 });
 
 app.io.on( 'connection', function( client ){
