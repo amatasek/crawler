@@ -18,9 +18,9 @@
     },
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/amatasek/crawler/"
     },
     "author": "Andrew Matasek",
-    "license": "",
+    "license": "MIT",
     "homepage": "localhost:3000"
 }
