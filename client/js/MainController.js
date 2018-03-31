@@ -20,16 +20,18 @@ function displayResults( results ){
 		modal = document.getElementById( 'modal-summary' ),
 		h3 = document.getElementById( 'h3-results' ),
 		p = document.getElementById( 'p-results' ),
+		first = document.getElementById( 'field-first' ).value,
+		last = document.getElementById( 'field-last' ).value,
 		hits = results.filter( function( result ){
 			return result.money;
 		});
 
 		if ( !hits.length ){
 			h3.innerText = 'No Results';
-			p.innerText = 'No unclaimed money found for PERSON. Try searching for someone else or selectiong a different set of states.';
+			p.innerText = 'No unclaimed money found for ' + first + ' ' + last + '. Try searching for someone else or selectiong a different set of states.';
 		} else {
 			h3.innerText = 'Unclaimed Money Found!';
-			p.innerHTML = 'The following states may be holding unclaimed money for PERSON:<br><br>';
+			p.innerHTML = 'The following states may be holding unclaimed money for ' + first + ' ' + last + ':<br><br>';
 
 			for ( let hit of hits ){        
 				p.innerHTML += hit.state + ': $' + hit.money + '<br>';
@@ -42,18 +44,27 @@ function displayResults( results ){
 	// Close on X click
 	button.onclick = function () {
 		modal.style.display = "none";
+		resetApp();
 	}
 	
 	// Close on click outside modal
 	window.onclick = function( event ){
 		if ( event.target == modal ) {
 			modal.style.display = "none";
+			resetApp();
 		}
 	}
 }
 
 function resetApp(){
-	var button = document.querySelector( 'button' );
+	var button = document.querySelector( 'button' ),
+		ul = document.getElementById( 'list-states' ),
+		lis = ul.querySelectorAll( 'li' );
 
-	button.disabled = true;
+	lis.forEach( function( li ){
+		var statusIcon = li.querySelector( '.status' );
+		if ( statusIcon ) li.removeChild( statusIcon );
+	});
+
+	button.disabled = false;
 }
