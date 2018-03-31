@@ -87,9 +87,11 @@ let states = [
 						}					
 
 						if ( rows.length ){
-							
-							// Skip first row while looping
-							for ( var i = 1; i < 20; i++ ){
+							// List only shows 20 rows + 1 header row
+							var max = rows.length < 21 ? rows.length : 21;
+
+							// Skip first row while looping ( header )
+							for ( var i = 1; i < max; i++ ){
 								var row = rows[i],
 									cell = row.children[6],
 									content = cell.innerHTML;

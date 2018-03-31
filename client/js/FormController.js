@@ -7,6 +7,9 @@ function onSubmit(){
 	// Disable the Start button
 	button.disabled = true;
 
+	// Remove focus from field in case of enter press
+	document.activeElement.blur();
+
 	// Iterate over all states collecting exclusions and starting spinners
 	lis.forEach( function( li ){
 		var check = li.querySelector( 'input' ),
@@ -25,9 +28,7 @@ function onSubmit(){
 	var payload = {
 		person: {
 			first: document.getElementById( 'field-first' ).value,
-			middle: document.getElementById( 'field-middle' ).value,
-			last: document.getElementById( 'field-last' ).value,
-			dob: document.getElementById( 'field-dob' ).value
+			last: document.getElementById( 'field-last' ).value
 		},
 		exclude: excludedStates
 	};

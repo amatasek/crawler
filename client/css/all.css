@@ -10,6 +10,10 @@ body {
 	overflow: auto;
 }
 
+#app-main {
+	width: 900px;
+}
+
 h1 {
 	font-size: 1.5em;
 	text-align: center;
@@ -206,7 +210,8 @@ button:disabled {
     padding: 0 5px 5px 5px;
 	border: darkgrey 2px solid;
 	border-radius: 4px;
-    width: 500px;
+	width: 500px;
+	left: 200px;
 }
 
 .close {
@@ -227,17 +232,20 @@ button:disabled {
 	position: fixed;
 	left: 0px;
 	top: 0px;
-	width: 100%;
-	max-width: 1000px;
+	width: 900px;
 	height: 100%;
 	z-index: 9999;
 	background: url('../img/preloader.gif') 50% 50% no-repeat white;
+	transition: all .5s linear;
+  	display: block;
 }
 
-#app-main {
-	width: 100%;
-	min-width: 600px;
-	max-width: 1000px;
+#app-mask.visuallyhidden {
+  opacity: 0;
+}
+
+#app-mask.hidden {
+  display: none;
 }
 
 #form-left,
@@ -246,16 +254,6 @@ button:disabled {
 }
 
 #field-first,
-#field-last,
-#field-dob {
-	width: 125px;
-}
-
-#field-first,
-#field-dob {
-	left: 400px;
-}
-
-#field-middle {
-	width: 15px;
+#field-last {
+	width: 200px;
 }

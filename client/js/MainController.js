@@ -4,10 +4,7 @@ window.onload = function(){
 
 	socket.on( 'implementation', function( implementation ){
 
-		setTimeout( function(){
-			document.getElementById( 'app-mask' ).hidden = true;
-		}, 500 );
-
+		removeLoadingMask();
 		setupStateList( implementation );
 	});
 
@@ -67,4 +64,16 @@ function resetApp(){
 	});
 
 	button.disabled = false;
+}
+
+function removeLoadingMask(){
+	var mask = document.getElementById( 'app-mask' );
+	
+	// Timeouts only for animation
+	setTimeout( function(){
+		mask.classList.add( 'visuallyhidden' );
+		setTimeout( function(){		
+			mask.classList.add( 'hidden' );
+		}, 500 );
+	}, 1000 );
 }
