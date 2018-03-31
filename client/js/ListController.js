@@ -3,7 +3,7 @@ function setupStateList( implementation ){
 
 	// Empty the list
 	while( ul.firstChild ){
-		grid.removeChild( ul.firstChild );
+		ul.removeChild( ul.firstChild );
 	}
 
 	// Add a Li to the Ul for each state
