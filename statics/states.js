@@ -14,6 +14,17 @@ let states = [
 			return new Promise( function( resolve, reject ){		
 				browser.visit( me.url, function(){
 					
+					// Check to make sure the elements we need exist
+					if ( 
+						!browser.document.getElementById( 'UCPname5' ) // text input
+						||
+						!browser.document.getElementById( 'Button1' ) // search button
+					){
+						result.error = 'Missing elements';
+						resolve( result );
+						return;
+					}
+					
 					browser.fill( '#UCPname5', person.last + ' ' + person.first );
 
 					browser.pressButton( '#Button1', function(){
@@ -37,17 +48,62 @@ let states = [
 	},
 
 	{
-		name: 'Wisconsin',
-		abbreviation: 'WI',
+		name: 'Indiana',
+		abbreviation: 'IN',
 		implemented: true,
-		url: 'https://tap.revenue.wi.gov/UCPSearch/_/',
+		url: 'https://indianaunclaimed.gov/apps/ag/ucp/index.html',
 		search: function( person, result ){
 			var me = this,
 				browser = new Browser();
 
-			browser.visit( me.url );
+			// This site throws console errors
+			browser.silent = true;
 
-			return result;
+			return new Promise( function( resolve, reject ){		
+				browser.visit( me.url, function(){
+					
+					// Check to make sure the elements we need exist
+					if ( 
+						!browser.document.getElementById( 'searchPhrase' ) // text input
+						||
+						!browser.document.querySelector( 'input.gsc-search-button' )  // search button
+					){
+						result.error = 'Missing elements';
+						resolve( result );
+						return;
+					}
+					
+					browser.fill( '#searchPhrase', person.first + ' ' + person.last );		
+
+					browser.pressButton( 'Search', function(){
+						
+						// Sometimes the following error randomly errors in Zombie's implementation
+						try {
+							var rows = browser.document.querySelectorAll( 'tr' );	
+						} catch( e ){
+							result.error = 'That strange error happened';
+							resolve( result );
+							return;
+						}					
+
+						if ( rows.length ){
+							
+							// Skip first row while looping
+							for ( var i = 1; i < 20; i++ ){
+								var row = rows[i],
+									cell = row.children[6],
+									content = cell.innerHTML;
+
+								// On this site they hide the actual values inside comments in the cells
+								// Lets dig them out of there
+								result.money += Number( content.substring( content.lastIndexOf( '<!--' ) + 4, content.lastIndexOf( '-->' ) ).trim() );
+							}
+						}						
+
+						resolve( result );
+					});
+				});
+			});
 		}
 	},
 
@@ -119,11 +175,6 @@ let states = [
 	{
 		name: 'Illinois',
 		abbreviation: 'IL',
-		implemented: false
-	},
-	{
-		name: 'Indiana',
-		abbreviation: 'IN',
 		implemented: false
 	},
 	{
@@ -289,6 +340,11 @@ let states = [
 	{
 		name: 'West Virginia',
 		abbreviation: 'WV',
+		implemented: false
+	},
+	{
+		name: 'Wisconsin',
+		abbreviation: 'WI',
 		implemented: false
 	},
 	{
