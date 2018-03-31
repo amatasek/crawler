@@ -34,7 +34,7 @@ function displayResults( results ){
 			p.innerHTML = 'The following states may be holding unclaimed money for ' + first + ' ' + last + ':<br><br>';
 
 			for ( let hit of hits ){        
-				p.innerHTML += hit.state + ': $' + hit.money + '<br>';
+				p.innerHTML += hit.state + ': $' + hit.money.toFixed( 2 ) + '<br>';
 			}      
     	}
 
