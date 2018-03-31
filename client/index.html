@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Crawler</title>
+
+	<link rel="stylesheet" href="css/all.css">
+
+	<script src="js/MainController.js"></script>
+	<script src="js/FormController.js"></script>
+	<script src="js/ListController.js"></script>
+
+	<script defer src="js/socket.io.js"></script>
+	<script defer src="js/fontawesome-all.min.js"></script>    
+</head>
+
+<body>
+
+	<div id="app-mask"></div>
+
+	<div id="app-main">
+		<form onsubmit="return onSubmit();">
+
+			<h1><span>Crawler</span></h1>
+			<p id="author">Andrew Matasek - 3/28/18</p>
+			<h2>A tool that searches US State government websites to help find unclaimed money</h2>   
+
+			<div class="section">
+				<h3>1. Enter Information</h3>
+				<h4>Fill out the form below with your info or the info of someone you know. You may be doing them a favor!</h4>
+				<div class="section-body">
+					<div class="flex-box">
+						<div id="form-left">
+							<label id="label-first" for="field-first">First Name</label>
+							<input required type="text" id="field-first" maxlength="20">							
+						</div>
+						<div id="form-right">
+							<label id="label-last" for="field-last">Last Name</label>
+							<input required type="text" id="field-last" maxlength="20">							
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="section">
+				<h3>2. Select States</h3>
+				<h4>Chose all states which could be holding unclaimed money for the person above</h4>
+				<div class="section-body">
+					<ul id="list-states"></ul>
+				</div>
+			</div>
+			<div class="section">
+				<h3>3. Profit</h3>
+				<div class="section-body">
+					<button type="submit">Start</button>
+				</div>
+			</div>
+
+		</form>        
+	</div>
+
+	<div id="modal-summary" class="modal">
+		<div class="modal-content">
+			<i class="close fas fa-times"></i>
+			<h3 id="h3-results"></h3>
+			<p id="p-results"></p>
+		</div>	
+	</div>
+
+</body>
+</html>

@@ -7,16 +7,20 @@
         "node": "8.0.0"
     },
     "dependencies": {
-        
+        "express": "^4.15.3",
+        "npm": "^5.8.0",
+        "request": "^2.81.0",
+        "socket.io": "^2.0.3",
+        "zombie": "^5.0.8"
     },
     "scripts": {
         "start": "node main"
     },
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/amatasek/crawler/"
     },
     "author": "Andrew Matasek",
-    "license": "",
+    "license": "MIT",
     "homepage": "localhost:3000"
 }
